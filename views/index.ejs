@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Search | Alex Servin</title>
+
+    <!-- Font Awesome Kit -->
+    <script
+      src="https://kit.fontawesome.com/0cfcdc178b.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <!-- Body Section -->
+  <body id="body" class="bg-white grid text-dark-gray">
+    <!-- Header - Theme Switch - Weather Title - City Input - Search Button -->
+    <header id="header" class="grid">
+      <button class="theme-switch bg-white">
+        <i class="fa-solid fa-circle-half-stroke fa-lg"></i>
+      </button>
+      <!-- Weather Title -->
+      <h1 class="weather-title fw-500 fs-900">
+        Weather Search <i class="fa-solid fa-cloud-sun"></i>
+      </h1>
+      <!-- Search Bar Container -->
+      <div class="search-bar-container flex">
+        <!-- Unit Switch -->
+        <div id="unit-switch-container" class="unit-switch bg-light-gray flex">
+          <button id="unit-switch" class="bg-less-dark-gray text-white fw-500">
+            C&#176;
+          </button>
+        </div>
+        <!-- City Input Form -->
+        <form class="form flex" action="/" method="POST">
+          <input
+            type="text"
+            name="city"
+            class="city-input bg-light-gray text-dark-gray fs-200"
+            placeholder="Type in a city name..."
+          />
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="search-button bg-light-gray text-dark-gray"
+          >
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main" class="main grid pre-post">
+      <!-- Current Weather Div -->
+      <div class="current-weather flex bg-light-gray text-dark-gray">
+        <!-- Weather Description -->
+        <% if (description !== null) { %>
+        <p class="description fw-500 fs-700"><%= description %></p>
+        <!-- Weather Icon -->
+        <% } %><% if (icon !== null) { %>
+        <img class="weather-icon" src="<%= icon %>" alt="" />
+        <!-- Current Temp -->
+        <% } %><% if (temp !== null) { %>
+        <p class="temp fw-700 fs-800">
+          <span class="celsius-value"><%= temp %></span>
+          <!-- degrees symbol -->
+          <span class="temp-suffix">&#176;</span>
+        </p>
+        <!-- City Value -->
+        <% } %><% if (city !== null) { %>
+        <p class="city fw-400 fs-500"><%= city %></p>
+        <!-- Country Value -->
+        <% } %><% if (country !== null) { %>
+        <p class="country fw-400 fs-300"><%= country %></p>
+        <% } %>
+      </div>
+      <!-- Current Conditions Div -->
+      <div class="current-conditions text-dark-gray bg-light-gray flex fs-400">
+        <!-- Humidity Value -->
+        <% if (humidity !== null) { %>
+        <p class="humidity flex">
+          <span class="fw-700">Humidity</span>
+          <span class="fw-400"><%= humidity %>%</span>
+        </p>
+        <!-- Wind Value -->
+        <% } %> <% if (wind !== null) { %>
+        <p class="wind flex">
+          <span class="fw-700">Wind</span>
+          <span class="fw-400">
+            <span class="wind-value"><%= wind %></span>
+            <!-- wind suffix (kph) -->
+            <span class="wind-suffix">kph</span></span
+          >
+        </p>
+        <!-- Feels Like Temp -->
+        <% } %> <% if (feelsLike !== null) { %>
+        <p class="feels-like flex">
+          <span class="fw-700">Feels Like</span>
+          <span class="fw-400">
+            <span class="celsius-value"><%= feelsLike %></span>
+            <!-- degrees symbol -->
+            <span class="temp-suffix">&#176;</span></span
+          >
+        </p>
+        <!-- Visibility Value -->
+        <% } %> <% if (visibility !== null) { %>
+        <p class="visibility flex">
+          <span class="fw-700">Visibility</span>
+          <span class="fw-400"
+            ><span class="vis-value"><%= visibility %></span>
+            <!-- visibility suffix (km) -->
+            <span class="vis-suffix">km</span></span
+          >
+        </p>
+        <% } %>
+      </div>
+      <!-- Forecast Div -->
+      <div class="forecast grid text-dark-gray">
+        <!-- Day 1 Div -->
+        <div class="day grid bg-light-gray fs-600">
+          <!-- Pass through each API Value for forecast day -->
+          <% if (day1 !== null && day1Icon !== null && day1LowTemp !== null && day1MaxTemp !== null) { %>
+          <!-- Day displayed (Mon, Tue, Wed, etc.) -->
+          <p class="day fw-500"><%= day1 %></p>
+          <!-- Day Icon -->
+          <img src="<%= day1Icon %>" alt="" />
+          <!-- Daily High and Low -->
+          <div class="forecast-temperatures flex">
+            <p class="low-temp fw-300">
+              <span class="celsius-value"><%= day1LowTemp %></span
+              ><span class="temp-suffix">&#176;</span>
+            </p>
+            <p class="high-temp fw-500">
+              <span class="celsius-value"><%= day1MaxTemp %></span
+              ><span class="temp-suffix">&#176;</span>
+            </p>
+          </div>
+          <% } %>
+        </div>
+        <!-- Day 2 Div -->
+        <div class="day grid bg-light-gray fs-600">
+          <!-- Pass through each API Value for forecast day -->
+          <% if (day2 !== null && day2Icon !== null && day2LowTemp !== null && day2MaxTemp !== null) { %>
+          <!-- Day displayed (Mon, Tues, Wed, etc.) -->
+          <p class="day fw-500"><%= day2 %></p>
+          <!-- Day Icon -->
+          <img src="<%= day2Icon %>" alt="" />
+          <!-- Daily High and Low -->
+          <div class="forecast-temperatures flex">
+            <p class="low-temp fw-300">
+              <span class="celsius-value"><%= day2LowTemp %></span
+              ><span class="temp-suffix">&#176;</span>
+            </p>
+            <p class="high-temp fw-500">
+              <span class="celsius-value"><%= day2MaxTemp %></span
+              ><span class="temp-suffix">&#176;</span>
+            </p>
+          </div>
+          <% } %>
+        </div>
+        <!-- Day 3 Div -->
+        <div class="day grid bg-light-gray fs-600">
+          <!-- Pass through each API Value for forecast day -->
+          <% if (day3 !== null && day3Icon !== null && day3LowTemp !== null && day3MaxTemp !== null) { %>
+          <!-- Day displayed (Mon, Tues, Wed, etc.) --> 
+          <p class="day fw-500"><%= day3 %></p>
+          <!-- Day Icon -->
+          <img src="<%= day3Icon %>" alt="" />
+          <!-- Daily High and Low -->
+          <div class="forecast-temperatures flex">
+            <p class="low-temp fw-300">
+              <span class="celsius-value"><%= day3LowTemp %></span
+              ><span class="temp-suffix">&#176;</span>
+            </p>
+            <p class="high-temp fw-500">
+              <span class="celsius-value"><%= day3MaxTemp %></span
+              ><span class="temp-suffix">&#176;</span>
+            </p>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </main>
+    <!-- Javascript DOM Script -->
+    <script src="index.js"></script>
+  </body>
+</html>
